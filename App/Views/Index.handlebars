@@ -366,7 +366,7 @@
         </div>
 
         <script>
-            var socket = io('http://http://yolosocial.azurewebsites.net');
+            var socket = io('http://yolosocial.azurewebsites.net');
             $(document).ready(() => {
                 socket.emit('Initialize', {ID : '{{user._id}}', DeviceHeight : $(window).height() - (51 + 50 + 50 + 45) } );
             });
