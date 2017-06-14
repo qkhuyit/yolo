@@ -1,0 +1,155 @@
+﻿
+<!DOCTYPE html>
+<html class="st-layout ls-top-navbar ls-bottom-footer show-sidebar sidebar-12" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Yolo: Register Account</title>
+    <link href="css/vendor/all.css" rel="stylesheet">
+    <link href="css/app/app.css" rel="stylesheet">
+    <!-- If you don't need support for Internet Explorer <= 8 you can safely remove these -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/css/custom.css" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="/Images/favicon.ico">
+    <link href="/libs/toastr/toastr.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="st-container">
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="/" class="navbar-brand hidden-xs navbar-brand-primary" style="min-width:250px;text-align:center">Yolo Social Network</a>
+                </div>
+                <div class="navbar-collapse collapse" id="collapse">
+                    <form class="navbar-form navbar-right hidden-xs" role="form" action="/sign-in" method="post">
+                        <input type="text" class="form-control my-white" placeholder="Email address ..." name="Email" required>
+                        <input type="password" class="form-control my-white" placeholder="Password ..." required name="Password">
+                        <button class="btn btn-primary" type="submit" style="font-weight:bold;border-radius:0px">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="st-pusher" style="padding:0px">
+            <div style="" class="col-xs-12 registerContent">
+                <div class="col-xs-6 col-xs-offset-5">
+                    <div class="row" style="background-color:white;padding:10px">
+                        <h4><strong>Register Account Yolo</strong></h4>
+                        <hr />
+                        <form method="post" action="/sign-up">
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <input class="form-control my-white" placeholder="First Name (Ex: Quách)" name="FirstName" value="{{model.FirstName}}" required type="text">
+                                    <span style="padding:5px;color:red">{{Error.ErrorFirstName}}</span>
+                                </div>
+                                <div class="col-xs-6">
+                                    <input class="form-control my-white" placeholder="Last Name (Ex: Kim Huy)" name="LastName" value="{{model.LastName}}" required type="text">
+                                    <span style="padding:5px;color:red">{{Error.LastName}}</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <input class="form-control my-white" placeholder="Email (Ex: qkhuyit@gmail.com)" name="Email" value="{{model.Email}}" required type="email">
+                                    <span style="padding:5px;color:red">{{Error.Email}}</span>
+                                </div>
+                                <div class="col-xs-6">
+                                    <input class="form-control my-white" placeholder="Mobile (Ex: +84 1643900994)" type="tel" name="Mobile" value="{{model.Mobile}}" required>
+                                    <span style="padding:5px;color:red">{{Error.Mobile}}</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <input class="form-control my-white" placeholder="Address (Ex: Trại tạm giam Chí Hòa, 324 Hoài Hưng, Phường 13, Quận 10, TP.HCM)" name="Address" type="text" value="{{model.Address}}">
+                                    <span style="padding:5px;color:red">{{Error.Address}}</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-3">
+                                    <select class="form-control my-white" required name="Sex" value="{{model.Sex}}">
+                                        <option value="1">Male</option>
+                                        <option value="0">Female</option>
+                                    </select>
+                                </div>
+                                <div class="col-xs-5">
+                                    <input id="datepicker" type="text" name="BirtDate" required class="form-control my-white datepicker" value="{{model.BirtDate}}" placeholder="Birth Date (Ex: 26/08/1996)" style="border-radius:4px !important">
+                                    <span style="padding:5px;color:red">{{Error.BirthDate}}</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <input class="form-control my-white" placeholder="Password" type="password" name="Password" required>
+                                    <span style="padding:5px;color:red">{{Error.Password}}</span>
+                                </div>
+                                <div class="col-xs-6">
+                                    <input class="form-control my-white" placeholder="Confirm Password" name="RePassword" required type="password">
+                                    <span style="padding:5px;color:red">{{Error.RePassword}}</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-12 text-right">
+                                    <button class="btn btn-primary btn-no-boder" type="submit">Register Now</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer">
+                <strong>Yolo Social</strong> &copy; Copyright 2017 by <a href="https://www.facebook.com/qkhuyit" target="_blank"><strong>qkhuyit@gmail.com</strong></a>
+            </footer>
+        </div>
+    </div>
+    <script>
+            var colors = {
+                "danger-color": "#e74c3c",
+                "success-color": "#81b53e",
+                "warning-color": "#f0ad4e",
+                "inverse-color": "#2c3e50",
+                "info-color": "#2d7cb5",
+                "default-color": "#6e7882",
+                "default-light-color": "#cfd9db",
+                "purple-color": "#9D8AC7",
+                "mustard-color": "#d4d171",
+                "lightred-color": "#e15258",
+                "body-bg": "#f6f6f6"
+            };
+            var config = {
+                theme: "admin",
+                skins: {
+                    "default": {
+                        "primary-color": "#3498db"
+                    }
+                }
+            };
+    </script>
+    <script src="/js/vendor/all.js"></script>
+    <script src="/js/app/app.js"></script>
+    <script src="/libs/toastr/toastr.js"></script>
+    {{#if Data}}
+    <script>
+            if ({{Data.Status }} == true){
+            toastr.success('{{Data.Message}}');
+            setTimeout(function () {
+                 window.location.href = "/sign-in";
+            }, 1000);
+        }else{
+            toastr.Error('{{Data.Message}}')
+        }
+    </script>
+    {{/if}}
+</body>
+</html>

@@ -1,0 +1,221 @@
+#filter {
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid transparent;
+}
+#filter form label {
+  color: #888;
+  margin-right: 10px;
+}
+#filter form .selectpicker {
+  font-weight: 400;
+}
+#filter form select.btn-primary {
+  padding: 5px 3px;
+}
+#filter form input.form-control {
+  background: #ffffff;
+}
+@media (min-width: 768px) {
+  #filter #users-filter-trigger {
+    display: inline-block;
+  }
+  #filter #users-filter-trigger .search-name input {
+    width: auto;
+    display: inline-block;
+  }
+}
+@media (max-width: 768px) {
+  #filter .bootstrap-select {
+    width: 100% !important;
+    margin-bottom: 10px;
+  }
+  #filter #users-filter-trigger {
+    display: block;
+  }
+  #filter #users-filter-trigger .form-control {
+    margin-bottom: 10px;
+  }
+}
+.timeline-appointments .panel-heading {
+  padding: 5px;
+  border-bottom: 1px solid #f5f5f5;
+}
+.timeline-appointments .panel-heading .pull-right {
+  line-height: 34px;
+  padding-right: 10px;
+}
+.timeline-appointments > ul {
+  background: #ffffff;
+  margin: 0;
+}
+.timeline-appointments > ul ul {
+  margin: 0;
+}
+.timeline-appointments > ul > li {
+  background: #fff;
+  margin-left: 100px;
+  border-left: 1px solid #f5f5f5;
+  position: relative;
+}
+.timeline-appointments > ul > li .time {
+  position: absolute;
+  left: -90px;
+  top: -10px;
+  width: 70px;
+  text-align: right;
+  color: #6e7882;
+  font-weight: bold;
+}
+.timeline-appointments > ul > li .dot {
+  position: absolute;
+  left: -6px;
+  top: -6px;
+  background: #fff;
+  border-radius: 50%;
+}
+.timeline-appointments > ul > li .appointments {
+  min-height: 60px;
+  background: -webkit-linear-gradient(top, #f0f0f0 0%, white 5%) 0 0;
+  background: linear-gradient(top, #f0f0f0 0%, white 5%) 0 0;
+  background-size: 100% 30px;
+}
+.timeline-appointments > ul > li .appointments ul li {
+  line-height: 30px;
+  padding: 0 10px;
+}
+.timeline-appointments > ul > li .appointments ul li .btn-group-xs {
+  margin-top: 4px;
+}
+.timeline-appointments > ul > li .appointments ul li .apt {
+  display: block;
+  line-height: 30px;
+}
+.timeline-appointments > ul > li:first-of-type {
+  padding-top: 30px;
+}
+.timeline-appointments > ul > li:first-of-type .time {
+  top: 20px;
+}
+.timeline-appointments > ul > li:first-of-type .dot {
+  top: 24px;
+}
+.login {
+  margin: 0 auto;
+}
+.login .container-fluid {
+  text-align: center;
+}
+.login .container-fluid .panel {
+  margin-bottom: 10px;
+}
+.login .container-fluid .forgot-pass {
+  color: #3498db;
+}
+.login .container-fluid .forgot-pass i {
+  margin: 3px;
+  color: #7b858f;
+}
+.login .container-fluid .forgot-pass:hover {
+  color: #3498db;
+  text-decoration: none;
+}
+.login .container-fluid .forgot-pass:hover i {
+  color: #7b858f;
+}
+.login .brand-logo {
+  display: inline-block;
+  background: #e8e8e8;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 20px 10px 10px;
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+}
+.login .brand-logo img {
+  width: 100%;
+}
+.login .brand-logo i {
+  font-size: 30px;
+  color: #6e7882;
+  vertical-align: middle;
+}
+@media (min-width: 768px) {
+  .login .brand-logo {
+    margin: 40px 10px 0;
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+  }
+  .login .brand-logo i {
+    font-size: 60px;
+  }
+}
+.login form .btn {
+  margin: 10px;
+}
+.login h1 {
+  margin-bottom: 20px;
+}
+@media (max-width: 768px) {
+  .login h1 {
+    margin-top: 0;
+  }
+}
+.tk-clndr-1 {
+  height: 100%;
+}
+.tk-clndr-1 .clndr {
+  height: 100%;
+}
+.tk-clndr-1 .clndr > .row {
+  height: 100%;
+}
+.tk-clndr-1 .clndr > .row > div {
+  height: 100%;
+}
+.tk-clndr-1 .clndr .clndr-grid {
+  background-color: #ffffff;
+  text-align: center;
+  border: 1px solid #e0e7e8;
+}
+.tk-clndr-1 .clndr .clndr-grid .days-of-the-week {
+  background: #ffffff;
+  border-bottom: 1px solid #e0e7e8;
+}
+.tk-clndr-1 .clndr .clndr-grid .header-day {
+  float: left;
+  width: 14.2857%;
+}
+.tk-clndr-1 .clndr .clndr-grid .day {
+  float: left;
+  width: 14.2857%;
+  height: 25%;
+  border-top: 1px solid #e0e7e8;
+  border-left: 1px solid #e0e7e8;
+}
+.tk-clndr-1 .clndr .clndr-grid .day.event {
+  background-color: #B4E09F;
+}
+.tk-clndr-1 .clndr .clndr-grid .day.today {
+  background-color: #E3C57F;
+}
+.tk-clndr-1 .clndr .clndr-grid .days .table-cell {
+  overflow-y: scroll;
+}
+.tk-clndr-1 .clndr .clndr-grid .empty,
+.tk-clndr-1 .clndr .clndr-grid .adjacent-month {
+  float: left;
+  width: 14.2857%;
+  height: 14.2857%;
+  background: #ddd;
+}
+.tk-clndr-1 .clndr .clndr-today-button {
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+}
+.tk-clndr-1 .clndr .clndr-today-button:hover {
+  background-color: #ddd;
+}

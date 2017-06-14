@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html class="st-layout ls-top-navbar ls-bottom-footer show-sidebar sidebar-l-sum-12" lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Yolo: Login</title>
+    <link href="/css/vendor/bootstrap.css" rel="stylesheet" />
+    <link href="/css/vendor/all.css" rel="stylesheet">
+    <link href="/css/app/app.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="/images/favicon.ico">
+    <link href="/css/custom.css" rel="stylesheet" />
+</head>
+
+<body style="overflow-y: auto">
+    <div class="st-container" style="overflow-y: auto">
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a href="#sidebar-menu" data-toggle="sidebar-menu" data-effect="st-effect-3" class="toggle pull-left visible-xs"><i class="fa fa-bars"></i></a>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="/" class="navbar-brand hidden-xs">Yolo Social Network</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-12 loginContent">
+            <div class="col-xs-6 col-xs-offset-3">
+                <div class="row" style="background-color:white;padding:10px;padding-bottom:50px">
+                    <div class="col-md-12 text-center">
+                        <h4><strong>Yolo Social</strong></h4>
+                        <hr />
+                    </div>
+                    <div class="col-xs-6 col-xs-offset-3">
+                        <form method="post" action="/sign-in">
+                            <div class="row">
+                                <input class="form-control my-white" placeholder="Email ..." name="Email" required type="email" value="" />
+                            </div>
+                            <div class="col-xs-12" style="height:20px"></div>
+                            <div class="row">
+                                <input class="form-control my-white" placeholder="Password ..." name="Password" required type="password" value="" />
+                            </div>
+                            <div class="col-xs-12 text-center" style="padding:5px">
+                                {{#if error}}
+                                <span class="text-danger">{{error}}</span>
+                                {{/if}}
+                            </div>
+                            <div class="row">
+                                <button class="btn btn-primary form-control btn-no-boder" style="font-weight:bold">Login Now</button>
+                            </div>
+                            <div class="row text-right" style="padding-top:10px">
+                                <a href="/forgot-password">Forgot Password ?</a> <br /><br />
+                                You no account ? <a href="/sign-up">Register now.</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            <strong>Yolo Social Network</strong> &copy; Copyright 2017 by <a title="Xem Profile" href="https://www.facebook.com/qkhuyit" target="_blank"><b>qkhuyit@gmail.com</b></a>
+        </footer>
+    </div>
+</body>
+
+</html>

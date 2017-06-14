@@ -1,0 +1,458 @@
+﻿
+<!DOCTYPE html>
+<html class="st-layout ls-top-navbar ls-bottom-footer show-sidebar sidebar-l2" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Yolo: {{user.FirstName}} {{user.LastName}}</title>
+    <link href="css/vendor/all.css" rel="stylesheet">
+    <link href="css/app/app.css" rel="stylesheet">
+    <!-- If you don't need support for Internet Explorer <= 8 you can safely remove these -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/css/custom.css" rel="stylesheet" />
+    <link href="/libs/toastr/toastr.css" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="/Images/favicon.ico">
+    <script src="/js/vendor/core/jquery.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/libs/moment.js"></script>
+    <script src="/libs/toastr/toastr.js"></script>
+    <link href="/libs/darkroom/darkroom.css" rel="stylesheet" />
+</head>
+
+<body style="overflow-y:hidden">
+    <div class="st-container" style="overflow-y:hidden">
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="javascript:" class="navbar-brand navbar-brand-primary" style="min-width:250px;text-align:center">Yolo Social Network</a>
+                </div>
+                <div class="navbar-collapse collapse" id="collapse">
+                    <div class="navbar-form navbar-left hidden-xs" role="search">
+                        <div class="search-2">
+                            <div class="input-group">
+                                <input type="text" class="form-control header-search my-input-white" placeholder="Tìm kiếm . . ." id="keyword">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary btn-no-boder" type="button" id="btnSearch" style="font-weight:bold" data-toggle="modal" data-target="#dialogSearchFriend">Yolo</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown notifications updates hidden-xs hidden-sm">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" onclick="ViewFriendRequest()">
+                                <i class="fa fa-user-plus"></i>
+                                <span class="badge floating badge-danger" id="lstFriendRequestCount" style="display:none">0</span>
+                            </a>
+                            <ul class="dropdown-menu" style="min-width:350px" id="lstFriendRequest">
+                                <li class="dropdown-header">Lời mời kết bạn</li>
+                            </ul>
+                        </li>
+                        <li class="dropdown notifications updates hidden-xs hidden-sm" onclick="ViewNotification()">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-bell-o"></i>
+                                <span class="badge floating badge-danger" id="lstNotificationCount" style="display:none">1</span>
+                            </a>
+                            <ul class="dropdown-menu" id="lstNotification">
+                                <li class="dropdown-header">Thông Báo</li>
+                            </ul>
+                        </li>
+                        <li class="dropdown user">
+                            <a href="#" data-toggle="dropdown">
+                                <img src="{{user.Avatar}}" alt="" id="avatarimg" class="img-circle" style="width:60px !important;height:50px" />{{user.FirstName}} {{user.LastName}} &nbsp;<span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu" style="width:100%">
+                                <li><a href="javascript:" data-toggle="modal" data-target="#dialogChangePassword"><i class="fa fa-lock"></i>Đổi Mật Khẩu</a></li>
+                                <li><a href="javascript:" data-toggle="modal" data-target="#dialogChangeAvatar"><i class="fa fa-picture-o"></i>Đổi Ảnh Đại Diện</a></li>
+                                <li><a href="/sign-out"><i class="fa fa-sign-out"></i>Đăng Xuất</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar sidebar-chat right sidebar-size-2 sidebar-offset-0 chat-skin-white" id=sidebar-chat style="width:250px">
+            <div class="split-vertical">
+                <div class="sidebar-block tabbable tabs-icons" style="text-align:center;font-size:20px">
+                    <ul class="nav nav-tabs" style="border-bottom:1px solid lightgrey;">
+                        <li class="active">
+                            <a title="Thêm thành viên" data-toggle="modal" data-target="#dialogAddGroupMemmber" href="javascript:">
+                                <i class="fa fa-user-plus"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="split-vertical-body">
+                    <div class="split-vertical-cell">
+                        <div class="tab-content">
+                            <div class="tab-pane active">
+                                <div data-scrollable>
+                                    <div class="split-vertical">
+                                        <div class="split-vertical-body">
+                                            <div class="split-vertical-cell">
+                                                <div style="overflow-y: hidden; outline: none;" tabindex="1">
+                                                    <ul id="lstMembers"></ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="st-pusher" style="padding:0px">
+            <div class="sidebar left sidebar-size-2 sidebar-offset-0 sidebar-skin-white sidebar-visible-desktop" id=sidebar-menu data-type=collapse style="border-right: 1px solid lightgrey;width:250px">
+                <div class="split-vertical">
+                    <div class="sidebar-block tabbable tabs-icons" style="text-align:center;font-size:20px">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#sidebar-tabs-menu" data-toggle="tab" title="Bạn bè" id="btnFriends">
+                                    <i class="fa fa-user"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#sidebar-tabs-2" data-toggle="tab" title="Nhóm" id="btnGrs">
+                                    <i class="fa fa-users"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="split-vertical-body" style="overflow-x:hidden !important;">
+                        <div class="split-vertical-cell">
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="sidebar-tabs-menu">
+                                    <div data-scrollable>
+                                        <div class="split-vertical">
+                                            <div class="chat-search">
+                                                <input type="text" class="form-control my-input-white" placeholder="Tìm Kiếm bạn bè... " style="border-radius:0px">
+                                            </div>
+                                            <div class="split-vertical-body">
+                                                <div class="split-vertical-cell" style="">
+                                                    <div data-scrollable="" style="overflow-y: hidden; outline: none;" tabindex="1">
+                                                        <ul class="chat-contacts" id="lstFriends"></ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="sidebar-tabs-2">
+                                    <div data-scrollable>
+                                        <div class="split-vertical">
+                                            <div class="chat-search">
+                                                <input type="text" class="form-control my-input-white" placeholder="Tìm Kiếm nhóm... " style="border-radius:0px">
+                                            </div>
+                                            <div class="split-vertical-body">
+                                                <div class="split-vertical-cell" style="">
+                                                    <div data-scrollable="" style="overflow-y: hidden; outline: none;" tabindex="1">
+                                                        <ul class="chat-contacts" id="lstGroup"></ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="sidebar-menu sm-active-item-bg sm-icons-right sm-icons-block">
+                        <li><a href="javascript:void(0)" data-toggle="modal" data-target="#dialogMain"><i class="fa fa-plus"></i> <span>Tạo Nhóm</span></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="st-content" id="msgContent" style="margin-left:250px;height:100% !important;overflow-y:hidden !important;background-color:white;">
+
+            </div>
+            <footer class="footer">
+                <strong>Yolo Social</strong> &copy; Copyright 2017 by <a href="https://www.facebook.com/" target="_blank"><strong>qkhuyit</strong></a>
+            </footer>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div id="dialogMain" class="modal fade" tabindex="-1" style="" aria-hidden="false">
+                    <div class="modal-dialog" style="padding-top:30px;height:auto">
+                        <div class="modal-content" style="width:400px;margin:auto;border-radius:0px">
+                            <div class="modal-header" style="padding:0px;text-align:center">
+                                <button type="button" class="close" data-dismiss="modal" style="padding-right:10px;color:red">×</button>
+                                <h5><strong class="modal-title">Tạo Nhóm</strong></h5>
+                            </div>
+                            <div class="modal-body" style="padding:1em !important" id="modalBody">
+                                <div class="row" style="margin-left:1em;margin-right:1em">
+                                    <div class="form-group">
+                                        <input type="number" class="input-non-border" placeholder="Mã Nhóm ... (VD: 12545845)" id="grCode" autofocus />
+                                        <div class="form-group has-error margin-none" style="display:none" id="divCode">
+                                            <label class="control-label has-error lbl-err" id="errorCode" style="">Input with error</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="input-non-border" placeholder="Tên nhóm ... (VD: Thiên Địa Global)" id="grName" />
+                                        <div class="form-group has-error margin-none" style="display:none" id="divName">
+                                            <label class="control-label has-error lbl-err" id="errorName" style="font-weight:normal !important">Input with error</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="input-non-border" placeholder="Mô tả ngắn ... (VD: Cộng đồng đồng râm)" id="grDescription" />
+                                        <div class="form-group has-error margin-none" style="display:none" id="divDes">
+                                            <label class="control-label has-error lbl-err" id="errorDes" style="font-weight:normal !important">Input with error</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-xs-12 text-center">
+                                        <img src="/images/seed/avatar/group.png" width="70" height="70" id="img" /><br /><br />
+                                        <a href="javascript:void(0)" onclick=" $('#file').trigger('click');">[Upload Ảnh]</a>
+                                        <input type="file" name="image" id="file" hidden="hidden" style="display:none" onchange="Upload()" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer text-right" style="padding:5px">
+                                <button class="btn btn-xs btn-primary btn-no-boder" onclick="CreateGroup()">Tạo Nhóm</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div id="dialogAddGroupMemmber" class="modal fade" tabindex="-1" style="" aria-hidden="false">
+                    <div class="modal-dialog" style="padding-top:30px;height:auto">
+                        <div class="modal-content" style="width:400px;margin:auto;border-radius:0px">
+                            <div class="modal-header" style="padding:0px;text-align:center">
+                                <button type="button" class="close" data-dismiss="modal" style="padding-right:10px;color:red">×</button>
+                                <h5><strong class="modal-title">Thêm Thành Viên</strong></h5>
+                            </div>
+                            <div class="modal-body" style="padding:1em !important" id="modalBody">
+                                <div class="row" style="margin-left:1em;margin-right:1em">
+                                    <div class="form-group">
+                                        <input type="email" class="input-non-border" onchange="$(" #divAddMember").css('display','none')" placeholder="Nhập vào email của người đó ..." id="addMember" autofocus style="text-align:center" />
+                                        <div class="form-group has-error margin-none" style="display:none;text-align:center" id="divAddMember">
+                                            <label class="control-label has-error lbl-err" id="errorAddMember" style="">Input with error</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer text-right" style="padding:5px">
+                                <button class="btn btn-xs btn-primary btn-no-boder" onclick="AddMember()">Thêm</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type="file" hidden="hidden" id="imgMessage" onchange="Send()" />
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div id="dialogChangePassword" class="modal fade" tabindex="-1" style="" aria-hidden="false">
+                    <div class="modal-dialog" style="padding-top:30px;height:auto">
+                        <div class="modal-content" style="width:400px;margin:auto;border-radius:0px">
+                            <div class="modal-header" style="padding:0px;text-align:center">
+                                <button type="button" class="close" data-dismiss="modal" style="padding-right:10px;color:red">×</button>
+                                <h5><strong class="modal-title">Đổi Mật Khẩu</strong></h5>
+                            </div>
+                            <div class="modal-body" style="padding:1em !important" id="modalBody">
+                                <div class="row" style="margin-left:1em;margin-right:1em">
+                                    <div class="form-group">
+                                        <input type="password" class="input-non-border" placeholder="Mật khẩu cũ" id="pass" autofocus style="text-align:center;" onchange="$(" #divErrChangePass").css('display','none')" />
+                                        <input type="password" class="input-non-border" placeholder="Mật mới" id="newPass" autofocus style="text-align:center;margin-top:10px" onchange="$(" #divErrChangePass").css('display','none')" />
+                                        <input type="password" class="input-non-border" placeholder="Xác nhận mật khẩu" id="rePass" autofocus style="text-align:center;margin-top:10px" onchange="$(" #divErrChangePass").css('display','none')" />
+                                        <div class="form-group has-error margin-none" style="display:none;text-align:center;padding-top:10px" id="divErrChangePass">
+                                            <label class="control-label has-error lbl-err" id="errChangePass" style="">Input with error</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer text-right" style="padding:5px">
+                                <button class="btn btn-xs btn-primary btn-no-boder" onclick="ChangePassword()">Xác Nhận</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div id="dialogSearchFriend" class="modal fade" tabindex="-1" style="" aria-hidden="false">
+                    <div class="modal-dialog" style="padding-top:30px">
+                        <div class="modal-content" style="height:auto;border-radius:0px">
+                            <div class="modal-header" style="padding:0px;text-align:center">
+                                <button type="button" class="close" data-dismiss="modal" style="padding-right:10px;color:red">×</button>
+                                <h5><strong class="modal-title">Tìm Kiếm</strong></h5>
+                            </div>
+                            <div class="modal-body" style="padding:1em !important" id="searchBody">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div id="dialogDeleteMsg" class="modal fade" tabindex="-1" style="" aria-hidden="false">
+                    <div class="modal-dialog" style="padding-top:30px">
+                        <div class="modal-content" style="height:auto;border-radius:0px">
+                            <div class="modal-body" style="padding:1em !important;text-align:center" id="searchBody">
+                                Bạn có muốn xóa tin nhắn này ?
+                            </div>
+                            <div class="modal-footer" style="padding:5px">
+                                <button class="btn btn-xs btn-danger btn-no-boder" data-dismiss="modal">Thôi</button>
+                                <button class="btn btn-xs btn-primary btn-no-boder" onclick="DeleteMsgNow()" data-dismiss="modal">Xóa</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div id="dialogDeleteMsgGr" class="modal fade" tabindex="-1" style="" aria-hidden="false">
+                    <div class="modal-dialog" style="padding-top:30px">
+                        <div class="modal-content" style="height:auto;border-radius:0px">
+                            <div class="modal-body" style="padding:1em !important;text-align:center" id="searchBody">
+                                Bạn có muốn xóa tin nhắn này ?
+                            </div>
+                            <div class="modal-footer" style="padding:5px">
+                                <button class="btn btn-xs btn-danger btn-no-boder" data-dismiss="modal">Thôi</button>
+                                <button class="btn btn-xs btn-primary btn-no-boder" onclick="DeleteMsgNowGr()" data-dismiss="modal">Xóa</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div id="dialogChangeAvatar" class="modal fade" tabindex="-1" style="padding-top: 0px; padding-bottom: 0px; padding-left: 17px;" aria-hidden="false">
+                    <div class="modal-dialog" style="width:auto !important;height:auto !important;padding-top:50px">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12 text-center">
+                                        <img id="image" src="/images/no-image.png" style="width:300px;height:300px" />
+                                        <div class="col-xs-12">
+                                            <a href="javascript:" onclick="$('#file').trigger('click');">[Upload]</a>
+                                            <input type="file" name="image" onchange="Upload()" id="file" style="display:none" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            var socket = io('http://127.0.0.1:1337');
+            $(document).ready(() => {
+                socket.emit('Initialize', {ID : '{{user._id}}', DeviceHeight : $(window).height() - (51 + 50 + 50 + 45) } );
+            });
+            var friendRequests = 0,
+                notifications = 0,
+                grAvatar = '/images/seed/avatar/group.png',
+                deviceScreenHeigt = 0,
+                user = {
+                    ID : '{{user._id}}',
+                    Avatar : '{{user.Avatar}}'
+                },
+                current = '';
+        </script>
+
+        <script src="/js/app/common.js"></script>
+        <script src="/js/vendor/all.js"></script>
+        <script src="/js/common.js"></script>
+        <script src="/js/app.js"></script>
+        <script src="/js/app/app.js"></script>
+        <script src="/libs/darkroom/fabric.js"></script>
+        <script src="/libs/darkroom/darkroom.js"></script>
+
+        <script>
+        function Upload()
+        {
+            if ($("#image").attr('src') == '/images/no-image.png')
+            {
+                var formData = new FormData();
+                formData.append('file', $('#file')[0].files[0]);
+                $.ajax({
+                       url : '/upload',
+                       type : 'POST',
+                       data : formData,
+                       processData: false,
+                       contentType: false,
+                       success: function (data) {
+                           console.log(data);
+                           data = data.replace('public','')
+                           $("#image").attr("src", data);
+                           var dkrm = new Darkroom('#image', {
+	                        minWidth: 300,
+	                        minHeight: 200,
+	                        maxWidth: 600,
+	                        maxHeight: 500,
+	                        backgroundColor: '#000',
+	                        plugins: {
+		                        crop: {
+			                        quickCropKey: 67,
+                                },
+                                save: {
+                                    callback: function () {
+                                                    $.ajax({
+                                                        method: 'POST',
+                                                        url: '/edit-avatar',
+                                                        data: {
+                                                            avatar: this.darkroom.canvas.toDataURL(),
+                                                            userId: '{{user._id}}'
+                                                        },
+                                                        contentType: "application/x-www-form-urlencoded",
+                                                        beforeSend: function () {
+                                                            console.log('saving avatar');
+                                                        },
+                                                        success: function (data) {
+                                                            console.log(data);
+                                                            if (data.Status == true) {
+                                                                toastr.success('Cập nhật thành công.');
+                                                                $("#avatarimg").attr("src", data.ImageUrl);
+                                                            } else {
+                                                               toastr.error('Cập nhật không thành công.');
+                                                            }
+                                                        }
+                                                    });
+                                                }
+                                            }
+	                        },
+	                        initialize: function() {
+                                var cropPlugin = this.plugins['crop'];
+                                cropPlugin.requireFocus();
+	                        }
+                        });
+                   }
+            });
+            }
+        }
+        </script>
+
+    </div>
+</body>
+</html>

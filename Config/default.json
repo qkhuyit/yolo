@@ -1,0 +1,8 @@
+{
+  "MongoDB": {
+    "ConnectionString": "mongodb://103.200.23.93:27017/Yolo"
+  },
+  "Server": {
+    "PORT": 1337
+  }
+}
