@@ -1,6 +1,6 @@
 {
   "MongoDB": {
-    "ConnectionString": "mongodb://103.200.23.93:27017/Yolo"
+    "ConnectionString": "mongodb://admin:qkhuy123@ds127998.mlab.com:27998/yolo-chat"
   },
   "Server": {
     "PORT": 1337
