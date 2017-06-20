@@ -163,9 +163,14 @@ router.post('/forgot-password', (req, res) => {
             });
             res.render('ForgotPassword', { layout: false, success: 'Mật khẩu đã được cấp lại. Vui lòng kiểm tra email để biết thêm chi tiết.' });
         } else {
-            res.render('ForgotPassword', { layout: false,error : 'Tài khoản không tòn tại.' });
+            res.render('ForgotPassword', { layout: false, error: 'Tài khoản không tòn tại.' });
         }
     }).catch(err => console.log(err));
+});
+
+//GET Tree
+router.get('/tree', (req, res, next) => {
+    res.render('Tree', { layout: false });
 });
 
 module.exports = router;
