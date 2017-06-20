@@ -173,4 +173,9 @@ router.get('/tree', (req, res, next) => {
     res.render('Tree', { layout: false });
 });
 
+//GET Tree
+router.get('/love-heart', (req, res, next) => {
+    res.render('LoveHeart', { layout: false });
+});
+
 module.exports = router;

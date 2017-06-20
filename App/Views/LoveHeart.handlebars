@@ -1,0 +1,105 @@
+<!--
+Author: 旋風 Desinger
+Edited by Vy Nghia
+© 2017 BA Script. Power by Amonika.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml="vi">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- Title -->
+    <title>Bích Diễm ❤ Kim Huy</title>
+    <!-- Font Independence -->
+    <style type="text/css">
+        @font-face {
+            font-family: digit;
+            src: url('digital-7_mono.ttf') format("truetype");
+        }
+    </style>
+    <!-- Default CSS -->
+    <link href="https://cdn.amonika.org//static/6QVuXpwGvy/css/8qFfyt" type="text/css" rel="stylesheet">
+    <!-- Script -->
+    <script type="text/javascript" src="https://cdn.amonika.org//static/6QVuXpwGvy/js/jquery"></script>
+    <script type="text/javascript" src="https://cdn.amonika.org//static/6QVuXpwGvy/js/Gt6MSJ"></script>
+    <script type="text/javascript" src="https://cdn.amonika.org//static/6QVuXpwGvy/js/vVy96M"></script>
+    <!-- Font -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:100' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+    <!-- Music -->
+    <audio autoplay="autopaly">
+        <source src="https://cdn.amonika.org//static/6QVuXpwGvy/music/hSEXAv92" type="audio/mp3">
+    </audio>
+    <!-- Main -->
+    <div id="main">
+        <div id="mainDiv">
+            <div id="content">
+
+                <!-- TEXT [EDIT ONLY] -->
+                <div id="code">
+                   
+                </div>
+                <!-- END TEXT -->
+
+                <!-- MESSAGES HEART -->
+                <div id="loveHeart">
+                    <canvas id="garden"></canvas>
+                    <div id="words">
+                        <div id="messages">
+                            Vk iêu, đây là thời gian chúng đã bên nhau... ~
+                            <div id="elapseClock"></div>
+                        </div>
+                        <div id="loveu">
+                            Trái tim của anh thuộc về em.<br/>
+                            <div class="signature">Bích Diễm ❤ Kim Huy
+                                <div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- [!] CHANGE TIME HERRE [!] -->
+            <script type="text/javascript">
+                var offsetX = $("#loveHeart").width() / 2;
+                var offsetY = $("#loveHeart").height() / 2 - 55;
+                var together = new Date();
+                together.setFullYear(2015, 2, 28); // <--- Edit Time Here 
+                together.setHours(20);
+                together.setMinutes(0);
+                together.setSeconds(0);
+                together.setMilliseconds(0);
+
+                if (!document.createElement('canvas').getContext) {
+                    var msg = document.createElement("div");
+                    msg.id = "errorMsg";
+                    msg.innerHTML = "Your browser doesn't support HTML5!<br/>Recommend use Chrome 14+/IE 9+/Firefox 7+/Safari 4+";
+                    document.body.appendChild(msg);
+                    $("#code").css("display", "none")
+                    $("#copyright").css("position", "absolute");
+                    $("#copyright").css("bottom", "10px");
+                    document.execCommand("stop");
+                } else {
+                    setTimeout(function () {
+                        startHeartAnimation();
+                    }, 5000);
+
+                    timeElapse(together);
+                    setInterval(function () {
+                        timeElapse(together);
+                    }, 500);
+
+                    adjustCodePosition();
+                    $("#code").typewriter();
+                }
+
+            </script>
+            <!-- [!] CHANGE TIME HERRE [!] -->
+
+</body>
+
+</html>
