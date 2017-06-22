@@ -31,6 +31,7 @@ app.use(express.static(path.join(__dirname, '/Public')));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 app.use(require('./APP/Controllers/HomeController'));
+app.use(require('./APP/Controllers/CanvasController'));
 app.use(require('./APP/API/CommonAPI'));
 
 var server = app.listen(PORT, function () {
