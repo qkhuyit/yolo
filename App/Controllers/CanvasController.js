@@ -3,7 +3,7 @@ var express = require('express'),
 
 
 router.get('/hung-y',(req,res) => {
-    res.render('More/HungLe');
+    res.render('More/HungLe',{layout : false});
 });
 
 
