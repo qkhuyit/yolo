@@ -169,7 +169,7 @@
             ctx.moveTo(0, 0);
             ctx.scale(0.75, 0.75);
             ctx.font = "12px 微软雅黑,Verdana";
-            ctx.fillText("Girl Friend", 23, 10);
+            ctx.fillText("Gửi tặng Nga", 23, 10);
             ctx.restore();
         },
         clear: function() {
