@@ -2,7 +2,7 @@ var express = require('express'),
     router = express.Router();
 
 
-router.get('/love-thuyen-forever',(req,res) => {
+router.get('/i-love-hien',(req,res) => {
     res.render('More/HungLe',{layout : false});
 });
 
